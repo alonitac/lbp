@@ -31,9 +31,7 @@ def applyChannelNoise(y, epsilon):
     return corrupt message yTilde
         yTilde_i is obtained by flipping y_i with probability epsilon
     '''
-    ###############################################################################
     yTilde = y ^ np.random.choice([0, 1], p=[1-epsilon, epsilon], size=y.shape)
-    ###############################################################################
     return yTilde
 
 
@@ -82,7 +80,7 @@ def constructFactorGraph(yTilde, H, epsilon):
         assignments = itertools.product([0, 1], repeat=len(scope))
 
         for a in assignments:
-            val[a] =
+            val[a] = (sum(a) + 1) % 2
         factor = Factor(scope=scope, card=[2]*len(scope), val=val, name='parity-{}'.format(i))
         graph.addFactor(factor)
     return graph
@@ -95,9 +93,9 @@ def do_part_b():
                   [1, 0, 1, 0, 1, 1]])
     epsilon = 0.05
     graph = constructFactorGraph(yTilde, H, epsilon)
-    ytest1 = np.array([[1, 1, 1, 1, 1, 1]]).reshape(6,1)  # invalid
-    ytest2 = np.array([[1, 1, 1, 1, 1, 1]]).reshape(6,1)  # invalid
-    ytest3 = np.array([[1, 1, 1, 1, 1, 1]]).reshape(6,1)  # invalid
+    ytest1 = np.array([[0, 1, 1, 0, 1, 0]]).reshape(6,1)  # invalid
+    ytest2 = np.array([[0, 1, 0, 1, 1, 0]]).reshape(6,1)  # invalid
+    ytest3 = np.array([[1, 1, 1, 1, 0, 0]]).reshape(6,1)  # valid
     print(
         graph.evaluateWeight(ytest1),
         graph.evaluateWeight(ytest2),
@@ -116,7 +114,12 @@ def do_part_c():
     N = G.shape[1]
     x = np.zeros((N, 1), dtype='int32')
     y = encodeMessage(x, G)
-
+    yTilde = applyChannelNoise(y, error)
+    graph = constructFactorGraph(yTilde, H, error)
+    graph.runParallelLoopyBP(50)
+    marginals = np.empty((N, 2))
+    for var in range(N):
+        marginals[var, :] = graph.estimateMarginalProbability(var)
 
     plt.figure()
     plt.title('Part C: Marginals for all-zeros input, error={}'.format(error))
@@ -193,24 +196,24 @@ def show_image(output, loc, title, num_locs=8):
 
 
 if __name__ == "__main__":
-    print('Doing part (b): Should see 0.0, 0.0, >0.0')
-    do_part_b()
+    # print('Doing part (b): Should see 0.0, 0.0, >0.0')
+    # do_part_b()
 
     print('Doing part (c):')
     do_part_c()
 
-    print('Doing part (d):')
-    do_part_de(10, 0.06)
-
-    print('Doing part (e):')
-    do_part_de(10, 0.08)
-    do_part_de(10, 0.10)
-
-    print('Doing part (f):')
-    do_part_fg(0.06)
-
-    print('Doing part (g):')
-    do_part_fg(0.10)
-
-    print('All done.')
-    plt.show()
+    # print('Doing part (d):')
+    # do_part_de(10, 0.06)
+    #
+    # print('Doing part (e):')
+    # do_part_de(10, 0.08)
+    # do_part_de(10, 0.10)
+    #
+    # print('Doing part (f):')
+    # do_part_fg(0.06)
+    #
+    # print('Doing part (g):')
+    # do_part_fg(0.10)
+    #
+    # print('All done.')
+    # plt.show()

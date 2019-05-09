@@ -100,18 +100,16 @@ class FactorGraph:
 
         Note: You can also calculate the marginal MAPs after each iteration here...
         '''
+        self.messagesVarToFactor
+        self.messagesFactorToVar
         for it in range(iterations):
             print('.', end='', flush=True)
             if (it+1) % 5 == 0:
                 print(it+1, end='', flush=True)
-            ##############################################################
-            # Todo: your code starts here
+
             # create variable-to-factor messages
+
             # create factor-to-variable messages
-            #
-            # ....
-            #
-            ##############################################################
         print()
 
     def estimateMarginalProbability(self, var):
@@ -122,17 +120,9 @@ class FactorGraph:
         param - var: a single variable index
         return: numpy array of size 2 containing the marginal probabilities 
                 that the variable takes the values 0 and 1
-        
-        example: 
-        >>> factor_graph.estimateMarginalProbability(0)
-        >>> [0.2, 0.8]
         '''
-        ###############################################################################
-        # Todo: your code here
-        #
-        # ....
-        #
-        ###############################################################################
+
+        return np.array([0.2, 0.8])
 
     def getMarginalMAP(self):
         '''
