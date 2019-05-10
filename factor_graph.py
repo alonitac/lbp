@@ -37,6 +37,7 @@ class FactorGraph:
         self.factors = []
         self.messagesVarToFactor = {}
         self.messagesFactorToVar = {}
+        self.marginals = [None for _ in range(numVar)]
     
     def addFactor(self, factor):
         '''
@@ -100,16 +101,28 @@ class FactorGraph:
 
         Note: You can also calculate the marginal MAPs after each iteration here...
         '''
-        self.messagesVarToFactor
-        self.messagesFactorToVar
         for it in range(iterations):
             print('.', end='', flush=True)
             if (it+1) % 5 == 0:
                 print(it+1, end='', flush=True)
 
-            # create variable-to-factor messages
+            for var_i, var_factors in enumerate(self.varToFactor):
+                msg = self.factors[var_factors[0]]
+                for factor_i in var_factors[1:]:
+                    msg = msg.multiply(self.getInMessage(factor_i, var_i, type='factorToVar')).normalize()
+                self.marginals[var_i] = msg.val
 
-            # create factor-to-variable messages
+                for factor_i in var_factors:
+                    self.messagesVarToFactor[(var_i, factor_i)] = msg.divide(self.getInMessage(factor_i, var_i, type='factorToVar')).normalize()
+
+            for factor_i, factor_vars in enumerate(self.factorToVar):
+                msg = self.factors[factor_i]  # TODO check if it is true
+                for var_i in factor_vars:
+                    msg = msg.multiply(self.getInMessage(var_i, factor_i, type='varToFactor')).normalize()
+
+                for var_i in factor_vars:
+                    self.messagesFactorToVar[(factor_i, var_i)] = \
+                    msg.divide(self.getInMessage(var_i, factor_i, type='varToFactor')).marginalize_all_but([var_i]).normalize()
         print()
 
     def estimateMarginalProbability(self, var):
@@ -121,8 +134,7 @@ class FactorGraph:
         return: numpy array of size 2 containing the marginal probabilities 
                 that the variable takes the values 0 and 1
         '''
-
-        return np.array([0.2, 0.8])
+        return np.array(self.marginals[var])
 
     def getMarginalMAP(self):
         '''
@@ -130,15 +142,8 @@ class FactorGraph:
         You may utilize the method estimateMarginalProbability.
         
         example: (N=2, 2*N=4)
-        >>> factor_graph.getMarginalMAP()
-        >>> [0, 1, 0, 0]
         '''
-        ###############################################################################
-        # Todo: your code here
-        #
-        # ....
-        #
-        ###############################################################################
+        return
 
     def print(self):
         print('Variables:')
