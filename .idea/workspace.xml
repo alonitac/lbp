@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="a10fd643-996a-434e-9d10-0c775d4f35e5" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/do_pa2.py" afterPath="$PROJECT_DIR$/do_pa2.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/factor_graph.py" afterPath="$PROJECT_DIR$/factor_graph.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -18,18 +17,18 @@
       <file leaf-file-name="factors.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/factors.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1206">
-              <caret line="95" column="0" lean-forward="true" selection-start-line="95" selection-start-column="0" selection-end-line="95" selection-end-column="0" />
+            <state relative-caret-position="1710">
+              <caret line="95" column="0" lean-forward="false" selection-start-line="95" selection-start-column="0" selection-end-line="95" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="factor_graph.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="factor_graph.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/factor_graph.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
-              <caret line="136" column="43" lean-forward="false" selection-start-line="136" selection-start-column="43" selection-end-line="136" selection-end-column="43" />
+            <state relative-caret-position="396">
+              <caret line="121" column="47" lean-forward="true" selection-start-line="121" selection-start-column="47" selection-end-line="121" selection-end-column="47" />
               <folding>
                 <element signature="e#269#285#0" expanded="true" />
               </folding>
@@ -37,11 +36,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="do_pa2.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="do_pa2.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/do_pa2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="247">
-              <caret line="128" column="0" lean-forward="true" selection-start-line="128" selection-start-column="0" selection-end-line="128" selection-end-column="0" />
+            <state relative-caret-position="31">
+              <caret line="128" column="0" lean-forward="false" selection-start-line="128" selection-start-column="0" selection-end-line="128" selection-end-column="0" />
               <folding>
                 <element signature="e#278#296#0" expanded="true" />
               </folding>
@@ -57,8 +56,8 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/factor_graph.py" />
         <option value="$PROJECT_DIR$/do_pa2.py" />
+        <option value="$PROJECT_DIR$/factor_graph.py" />
       </list>
     </option>
   </component>
@@ -143,7 +142,14 @@
       <option name="project" value="LOCAL" />
       <updated>1557419785994</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="complete c">
+      <created>1557502918686</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1557502918687</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -155,7 +161,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39863715" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32879046" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32879046" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33049405" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -195,7 +201,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="WIP" />
-    <option name="LAST_COMMIT_MESSAGE" value="WIP" />
+    <MESSAGE value="complete c" />
+    <option name="LAST_COMMIT_MESSAGE" value="complete c" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -204,6 +211,24 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/factors.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/factor_graph.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2412">
+          <caret line="136" column="43" lean-forward="false" selection-start-line="136" selection-start-column="43" selection-end-line="136" selection-end-column="43" />
+          <folding>
+            <element signature="e#269#285#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/factors.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2628">
@@ -325,28 +350,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/factors.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1206">
-          <caret line="95" column="0" lean-forward="true" selection-start-line="95" selection-start-column="0" selection-end-line="95" selection-end-column="0" />
+        <state relative-caret-position="1710">
+          <caret line="95" column="0" lean-forward="false" selection-start-line="95" selection-start-column="0" selection-end-line="95" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/factor_graph.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="136" column="43" lean-forward="false" selection-start-line="136" selection-start-column="43" selection-end-line="136" selection-end-column="43" />
-          <folding>
-            <element signature="e#269#285#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/do_pa2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="128" column="0" lean-forward="true" selection-start-line="128" selection-start-column="0" selection-end-line="128" selection-end-column="0" />
+        <state relative-caret-position="31">
+          <caret line="128" column="0" lean-forward="false" selection-start-line="128" selection-start-column="0" selection-end-line="128" selection-end-column="0" />
           <folding>
             <element signature="e#278#296#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/factor_graph.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="121" column="47" lean-forward="true" selection-start-line="121" selection-start-column="47" selection-end-line="121" selection-end-column="47" />
+          <folding>
+            <element signature="e#269#285#0" expanded="true" />
           </folding>
         </state>
       </provider>

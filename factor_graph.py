@@ -106,6 +106,15 @@ class FactorGraph:
             if (it+1) % 5 == 0:
                 print(it+1, end='', flush=True)
 
+            for factor_i, factor_scope in enumerate(self.factorToVar):
+                msg = self.factors[factor_i]  # TODO check if it is true
+                for var_i in factor_scope:
+                    msg = msg.multiply(self.getInMessage(var_i, factor_i, type='varToFactor')).normalize()
+
+                for var_i in factor_scope:
+                    self.messagesFactorToVar[(factor_i, var_i)] = \
+                    msg.divide(self.getInMessage(var_i, factor_i, type='varToFactor')).marginalize_all_but([var_i]).normalize()
+
             for var_i, var_factors in enumerate(self.varToFactor):
                 msg = self.factors[var_factors[0]]
                 for factor_i in var_factors[1:]:
@@ -115,14 +124,6 @@ class FactorGraph:
                 for factor_i in var_factors:
                     self.messagesVarToFactor[(var_i, factor_i)] = msg.divide(self.getInMessage(factor_i, var_i, type='factorToVar')).normalize()
 
-            for factor_i, factor_vars in enumerate(self.factorToVar):
-                msg = self.factors[factor_i]  # TODO check if it is true
-                for var_i in factor_vars:
-                    msg = msg.multiply(self.getInMessage(var_i, factor_i, type='varToFactor')).normalize()
-
-                for var_i in factor_vars:
-                    self.messagesFactorToVar[(factor_i, var_i)] = \
-                    msg.divide(self.getInMessage(var_i, factor_i, type='varToFactor')).marginalize_all_but([var_i]).normalize()
         print()
 
     def estimateMarginalProbability(self, var):
