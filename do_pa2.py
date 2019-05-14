@@ -116,7 +116,7 @@ def do_part_c():
     y = encodeMessage(x, G)
     yTilde = applyChannelNoise(y, error)
     graph = constructFactorGraph(yTilde, H, error)
-    graph.runParallelLoopyBP(10)
+    graph.runParallelLoopyBP(50)
     marginals = np.empty((2*N, 2))
     for var in range(2*N):
         marginals[var, :] = graph.estimateMarginalProbability(var)

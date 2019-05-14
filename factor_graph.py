@@ -107,22 +107,24 @@ class FactorGraph:
                 print(it+1, end='', flush=True)
 
             for factor_i, factor_scope in enumerate(self.factorToVar):
-                msg = self.factors[factor_i]  # TODO check if it is true
                 for var_i in factor_scope:
-                    msg = msg.multiply(self.getInMessage(var_i, factor_i, type='varToFactor')).normalize()
-
-                for var_i in factor_scope:
-                    self.messagesFactorToVar[(factor_i, var_i)] = \
-                    msg.divide(self.getInMessage(var_i, factor_i, type='varToFactor')).marginalize_all_but([var_i]).normalize()
+                    msg = self.factors[factor_i]
+                    for var_j in factor_scope:
+                        if var_j != var_i:
+                            msg = msg.multiply(self.getInMessage(var_j, factor_i, type='varToFactor'))
+                    self.messagesFactorToVar[(factor_i, var_i)] = msg.marginalize_all_but([var_i]).normalize()
 
             for var_i, var_factors in enumerate(self.varToFactor):
-                msg = self.factors[var_factors[0]]
-                for factor_i in var_factors[1:]:
-                    msg = msg.multiply(self.getInMessage(factor_i, var_i, type='factorToVar')).normalize()
-                self.marginals[var_i] = msg.val
-
                 for factor_i in var_factors:
-                    self.messagesVarToFactor[(var_i, factor_i)] = msg.divide(self.getInMessage(factor_i, var_i, type='factorToVar')).normalize()
+                    var_factors_cpy = var_factors.copy()
+                    var_factors_cpy.remove(factor_i)
+                    msg = self.factors[var_factors_cpy[0]]
+                    for factor_j in var_factors_cpy[1:]:
+                        msg = msg.multiply(self.getInMessage(factor_j, var_i, type='factorToVar'))
+
+                    self.messagesVarToFactor[(var_i, factor_i)] = msg.normalize()
+
+                # self.marginals[var_i] = msg.multiply(self.getInMessage(factor_i, var_i, type='factorToVar')).normalize().val
 
         print()
 
@@ -135,7 +137,7 @@ class FactorGraph:
         return: numpy array of size 2 containing the marginal probabilities 
                 that the variable takes the values 0 and 1
         '''
-        return np.array(self.marginals[var])
+        return self.factors[var].multiply(self.messagesVarToFactor[(var, var)]).marginalize_all_but([var]).val
 
     def getMarginalMAP(self):
         '''
@@ -144,7 +146,10 @@ class FactorGraph:
         
         example: (N=2, 2*N=4)
         '''
-        return
+        y = []
+        for var in range(len(self.var)):
+            y.append(self.estimateMarginalProbability(var))
+        return np.argmax(y, axis=0)
 
     def print(self):
         print('Variables:')
