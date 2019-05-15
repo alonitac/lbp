@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 import itertools
 from factor_graph import *
 from factors import *
+from scipy.spatial import distance
 
 
 def loadLDPC(name):
@@ -117,9 +118,9 @@ def do_part_c():
     yTilde = applyChannelNoise(y, error)
     graph = constructFactorGraph(yTilde, H, error)
     graph.runParallelLoopyBP(50)
-    marginals = np.empty((2*N, 2))
+    marginals = []
     for var in range(2*N):
-        marginals[var, :] = graph.estimateMarginalProbability(var)
+        marginals.append(graph.estimateMarginalProbability(var)[1])
 
     plt.figure()
     plt.title('Part C: Marginals for all-zeros input, error={}'.format(error))
@@ -142,18 +143,16 @@ def do_part_de(numTrials, error, iterations=50):
     plt.title('Part D/E: Hamming distances, error={}'.format(error))
     for trial in range(numTrials):
         print('Trial number', trial)
-        ##############################################################
-        # Todo: your code starts here
-        # apply noise, construct the graph
-        # run loopy while retrieving the marginal MAP after each iteration
-        # calculate Hamming distances and plot
-        #
-        # ....
-        #
-        # plt.plot(hamming_distances)
+        yTilde = applyChannelNoise(y, error)
+        graph = constructFactorGraph(yTilde, H, error)
+        hamming_distances = []
+        for i in range(iterations):
+            graph.runParallelLoopyBP(1)
+            y_tmp = graph.getMarginalMAP()
+            hamming_distances.append(distance.hamming(y, y_tmp))
+        plt.plot(hamming_distances)
     plt.grid(True)
     plt.savefig('part_de_{}.png'.format(error), bbox_inches='tight')
-    ##############################################################
 
 
 def do_part_fg(error):
@@ -167,22 +166,23 @@ def do_part_fg(error):
     x = img.reshape(N, 1)
     y = encodeMessage(x, G)
     yTilde = applyChannelNoise(y, error)
+    graph = constructFactorGraph(yTilde, H, error)
 
     plt.figure()
     plt.title('Part F/G: Image reconstruction, error={}'.format(error))
     show_image(yTilde, 0, 'Input')
 
-    ##############################################################
-    # Todo: your code starts here
-    #
-    # ....
-    #
-    ##############################################################
-    # plot_iters = np.array([0, 1, 3, 5, 10, 20, 30])
-    # for i, result in enumerate(results[plot_iters]):
-    #     show_image(result, i+1, 'Iter {}'.format(plot_iters[i]))
+    plot_iters = np.array([0, 1, 3, 5, 10, 20, 30])
+    results = [yTilde]
+    for i in range(max(plot_iters)):
+        graph.runParallelLoopyBP(1)
+        if i+1 in plot_iters:
+            y_tmp = graph.getMarginalMAP()
+            results.append(y_tmp)
+
+    for i, result in enumerate(results):
+        show_image(result, i+1, 'Iter {}'.format(plot_iters[i]))
     plt.savefig('part_fg_{}.png'.format(error), bbox_inches='tight')
-    ################################################################
 
 
 def show_image(output, loc, title, num_locs=8):
@@ -196,24 +196,24 @@ def show_image(output, loc, title, num_locs=8):
 
 
 if __name__ == "__main__":
-    # print('Doing part (b): Should see 0.0, 0.0, >0.0')
-    # do_part_b()
+    print('Doing part (b): Should see 0.0, 0.0, >0.0')
+    do_part_b()
 
     print('Doing part (c):')
     do_part_c()
 
-    # print('Doing part (d):')
-    # do_part_de(10, 0.06)
-    #
-    # print('Doing part (e):')
-    # do_part_de(10, 0.08)
-    # do_part_de(10, 0.10)
-    #
-    # print('Doing part (f):')
-    # do_part_fg(0.06)
-    #
-    # print('Doing part (g):')
-    # do_part_fg(0.10)
-    #
-    # print('All done.')
-    # plt.show()
+    print('Doing part (d):')
+    do_part_de(10, 0.06)
+
+    print('Doing part (e):')
+    do_part_de(10, 0.08)
+    do_part_de(10, 0.10)
+
+    print('Doing part (f):')
+    do_part_fg(0.06)
+
+    print('Doing part (g):')
+    do_part_fg(0.10)
+
+    print('All done.')
+    plt.show()

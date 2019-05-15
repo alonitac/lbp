@@ -124,10 +124,6 @@ class FactorGraph:
 
                     self.messagesVarToFactor[(var_i, factor_i)] = msg.normalize()
 
-                # self.marginals[var_i] = msg.multiply(self.getInMessage(factor_i, var_i, type='factorToVar')).normalize().val
-
-        print()
-
     def estimateMarginalProbability(self, var):
         '''
         Estimate the marginal probability of a single variable after running
@@ -149,7 +145,7 @@ class FactorGraph:
         y = []
         for var in range(len(self.var)):
             y.append(self.estimateMarginalProbability(var))
-        return np.argmax(y, axis=0)
+        return np.argmax(y, axis=1)
 
     def print(self):
         print('Variables:')
